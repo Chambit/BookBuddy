@@ -1,0 +1,246 @@
+
+.toggle-btn {
+  width: 49%;
+  height: 40px;
+  font-size: 15px;
+  background-color: #e5ecfc;
+  border: none;
+  border-radius: 0.2em;
+  cursor: pointer;
+}
+.toggle-btn:hover {
+  background-color: #d8e3ff;
+}
+.first-toggle {
+  margin-right: 2px;
+}
+.toggle-active {
+  background-color: #d8e3ff;
+  border: 1px solid rgb(209, 209, 209);
+}
+
+.main-content {
+  padding: 50px;
+}
+
+.post-zone {
+  padding: 11px 100px 8px 100px;
+}
+.post-card {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  padding: 20px;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.post-card:hover {
+  transform: translateY(-5px);
+}
+
+.post-title {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.post-details p {
+  margin: 5px 0;
+}
+
+.post-user {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.post-content {
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.post-time,
+.post-like,
+.post-category,
+.post-keyword {
+  font-size: 12px;
+  color: #888;
+}
+
+/* .post-time::before,
+.post-like::before,
+.post-category::before,
+.post-keyword::before {
+  content: "• ";
+  margin-right: 5px;
+} */
+
+.post-time,
+.post-like {
+  margin-right: 10px;
+}
+
+.loading-container {
+  
+  position: fixed;
+  top: 44%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.loading-container img {
+  width: 100px;
+}
+
+.notification-modal-header {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.mark-all-read-button {
+  margin-bottom: 5px;
+  background-color: #a5b8cd;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.mark-all-read-button:hover {
+  background-color: #91a2b5;
+}
+
+.notification-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.notification-modal-zone {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  justify-content: space-between;
+}
+.notification-item {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 10px;
+  font-size: 11px;
+  transition: background-color 0.3s;
+}
+
+.notification-item:hover {
+  background-color: #ebebeb;
+}
+
+.notification-item.read {
+  opacity: 0.6;
+}
+.post-title-link {
+  color: #909bb4;
+  font-weight: bold;
+  cursor: pointer;
+}
+.post-title-link:hover {
+  border-bottom: 1px solid #b0b7c9;
+}
+
+.notification-message {
+  margin: 0;
+  font-size: 13px;
+  margin-bottom: 10px;
+}
+.noti-modal-p{
+  font-size: 14px;
+  text-align: center;
+  margin-top: 50px;
+  margin-bottom: 30px;
+}
+
+.notification-time {
+  display: block;
+  font-size: 12px;
+  color: #999;
+  margin-top: 5px;
+}
+
+.mark-read-button {
+  background-color: #a5b8cd;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.mark-read-button:hover {
+  background-color: #91a2b5;
+}
+
+.show-unread-button, .show-all-button {
+  background-color: #deeaff;
+  color: #595959;
+  border: none;
+  width: 50%;
+  padding: 7px 10px;
+  /* border-radius: 4px; */
+  cursor: pointer;
+  transition: background-color 0.3s;
+  /* margin-right: 5px; 버튼 사이 여백 추가 */
+}
+
+.show-unread-button:hover, .show-all-button:hover {
+  background-color: #c3d6f7;
+}
+
+.show-unread-button.active, .show-all-button.active {
+  background-color: #c3d6f7;
+}
+
+.notification-modal {
+  position:relative ;
+}
+.exitBtn {
+  position: absolute;
+  top: -5px;
+  right: -15px;
+}
+
+.exitBtn {
+  cursor: pointer;
+}
+
+
+.noLogin-header {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+}
+.noLogin-header img {
+  width: 50px;
+  border-radius: 50px;
+}
+.noLogin-header p {
+  margin: 15px 0;
+}
+.notLogin-post-thumbnail {
+  margin: 10px 0;
+  width: 200px;
+}
+.noLogin-imgZone {
+  display: flex;
+  justify-content: center;
+}
+.notLogin-postDetail {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 10px;
+}

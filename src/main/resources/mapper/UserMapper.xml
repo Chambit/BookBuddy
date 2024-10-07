@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="book.project.bookbuddy.user.UserMapper">
+
+  <update id="updateProfile" parameterType="UserVO">
+    UPDATE USER
+    SET
+        USER_NICK = #{user_NICK},
+        USER_PHONE = #{user_PHONE},
+        USER_BIRTH = #{user_BIRTH},
+        CATEGORY_NO = #{category_NO},
+        KEYWORD_NO = #{keyword_NO},
+        USER_EMAIL = #{user_EMAIL},
+        PROFILE_URL = #{profile_URL}
+    WHERE user_NO = #{user_NO}
+  </update>
+  <select id="getRecommendPostCount">
+    SELECT COUNT(*) FROM RECOMMEND WHERE USER_NO = (SELECT USER_NO FROM USER WHERE USER_ID=#{userId})
+  </select>
+  <select id="getReviewPostCount">
+    SELECT COUNT(*) FROM REVIEW WHERE USER_NO = (SELECT USER_NO FROM USER WHERE USER_ID=#{userId})
+  </select>
+  <select id="getFollow">
+    SELECT (SELECT COUNT(*) AS following FROM FOLLOWER WHERE USER_NO = #{userNo}) AS following,
+    COUNT(*) AS follower FROM FOLLOWER WHERE FOLLOW_NO = #{userNo}
+  </select>
+  <select id="getUserNo">SELECT USER_NO FROM USER WHERE USER_ID=#{userId}</select>
+  <select id="getUserNick">SELECT USER_NICK FROM USER WHERE USER_NO=#{userNo}</select>    
+  <select id="getFollowerList">
+    SELECT 
+    U.*,
+    CASE 
+        WHEN F2.USER_NO IS NOT NULL THEN 'true'
+        ELSE 'false'
+    END AS CHECK_FOLLOWING
+    FROM 
+        FOLLOWER F
+        LEFT JOIN USER U ON F.USER_NO = U.USER_NO
+        LEFT JOIN FOLLOWER F2 ON F2.FOLLOW_NO = U.USER_NO AND F2.USER_NO = #{userNo}
+    WHERE 
+        F.FOLLOW_NO = #{userNo}
+        AND U.USER_NO IS NOT NULL
+  </select>
+  <select id="getFollowerList2">
+    SELECT U.*, 
+       CASE 
+           WHEN EXISTS (
+               SELECT 1 
+               FROM FOLLOWER F2 
+               WHERE F2.USER_NO = #{userNo} AND F2.FOLLOW_NO = U.USER_NO
+           ) THEN true 
+           ELSE false 
+       END AS CHECK_FOLLOWING
+    FROM FOLLOWER F 
+    LEFT JOIN USER U ON F.USER_NO = U.USER_NO
+    WHERE F.FOLLOW_NO = #{feedNo}
+  </select>
+  <select id="getFollowingList">
+    SELECT U.* 
+    FROM FOLLOWER F LEFT JOIN USER U ON F.FOLLOW_NO = U.USER_NO
+    WHERE F.USER_NO = #{userNo}
+  </select>
+  <select id="getFollowingList2">
+    SELECT U.*, 
+       CASE 
+           WHEN EXISTS ( 
+               SELECT 1 
+               FROM FOLLOWER F2 
+               WHERE F2.USER_NO = #{userNo} AND F2.FOLLOW_NO = U.USER_NO
+           ) THEN true 
+           ELSE false 
+       END AS CHECK_FOLLOWING
+    FROM FOLLOWER F 
+    LEFT JOIN USER U ON F.FOLLOW_NO = U.USER_NO
+    WHERE F.USER_NO = #{feedNo}
+  </select>
+  <insert id="addFollow">
+    INSERT INTO FOLLOWER (`USER_NO`,`FOLLOW_NO`) VALUES(#{userNo},#{toUserNo})
+  </insert>
+  <delete id="cancelFollow">
+    DELETE FROM FOLLOWER WHERE USER_NO= #{userNo} AND FOLLOW_NO = #{toUserNo}
+  </delete>
+  <select id="checkFollow">
+    SELECT COUNT(*) FROM FOLLOWER WHERE USER_NO=#{userId} AND FOLLOW_NO= #{toUserNo}
+  </select>
+  <select id="getUnReadNotification">
+    SELECT COUNT(*) FROM NOTIFICATION WHERE RECEIVE_USER = #{userNo} AND NTF_CHECK=false
+  </select>
+
+</mapper>

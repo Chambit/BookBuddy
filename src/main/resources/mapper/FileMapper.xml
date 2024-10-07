@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="book.project.bookbuddy.file.S3FileMapper">
+
+    <select id="getProfileUrl">
+        SELECT PROFILE_URL FROM USER WHERE USER_ID = #{id}
+    </select>
+
+    <insert id="insertRecommendImg">
+        INSERT INTO FILE (FILE_URL,FILE_CATEGORY,RECOMMEND_NO) 
+        VALUES (#{url},'recommend',#{rcm_no})
+    </insert>
+    <insert id="insertReviewImg">
+        INSERT INTO FILE (FILE_URL,FILE_CATEGORY,REVIEW_NO) 
+        VALUES (#{url},'review',#{rv_no})
+    </insert>
+
+    <select id="getPostImgs">
+        SELECT * FROM FILE WHERE ${type}_NO= ${postNo} AND FILE_CATEGORY='${type}'
+    </select>
+
+    <delete id="deleteFile">
+        DELETE FROM FILE WHERE FILE_NO = #{fileNo}
+    </delete>
+
+
+</mapper>

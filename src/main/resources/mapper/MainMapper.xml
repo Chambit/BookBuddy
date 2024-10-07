@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="book.project.bookbuddy.main.MainMapper">
+    <select id="getVO"> 
+        SELECT * FROM USER WHERE USER_ID = #{id}
+    </select>
+    <select id="getAllCategories">
+        SELECT * FROM CATEGORY
+    </select>
+
+    <select id="getAllKeywords">
+        SELECT * FROM KEYWORD
+    </select>
+
+    <select id="checkDuplicateId">
+        SELECT COUNT(USER_NO) FROM USER WHERE USER_ID = #{id}
+    </select>
+
+    <select id="checkDuplicateNick">
+        SELECT COUNT(USER_NO) FROM USER WHERE USER_NICK = #{id}
+    </select>
+
+    <insert id="joinBuddy" parameterType="UserVO">
+        INSERT INTO USER (USER_ID, USER_PWD, USER_NICK, USER_PHONE, USER_BIRTH, CATEGORY_NO, KEYWORD_NO, USER_EMAIL,PROFILE_URL)
+        VALUES
+            (#{user_ID}, #{user_PWD}, #{user_NICK}, #{user_PHONE}, #{user_BIRTH}, #{category_NO}, #{keyword_NO}, #{user_EMAIL},#{profile_URL});
+    </insert>
+
+    <select id="getNoti">
+        SELECT * FROM NOTIFICATION WHERE RECEIVE_USER = #{userNo} ORDER BY NTF_TIME DESC
+    </select>
+
+</mapper>
